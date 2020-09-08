@@ -10,7 +10,7 @@ typedef struct {
 	uint8_t FontHeight;   /*!< Font height in pixels */
 	const uint16_t *data; /*!< Pointer to data font data array */
 } FontDef;
-
+extern FontDef Font_5x7;
 #ifdef SSD1306_INCLUDE_FONT_6x8
 extern FontDef Font_6x8;
 #endif

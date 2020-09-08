@@ -97,14 +97,14 @@ void ssd1306_TestRectangle() {
   {
     ssd1306_DrawRectangle(1 + (5*delta),1 + (5*delta) ,SSD1306_WIDTH-1 - (5*delta),SSD1306_HEIGHT-1 - (5*delta),White);
     ssd1306_UpdateScreen();
-    HAL_Delay(50);
+    HAL_Delay(75);
   }
   ssd1306_TestLine();
   for(delta = 0; delta < 7; delta ++)
   {
 	  ssd1306_DrawRectangle(1 + (5*delta),1 + (5*delta) ,SSD1306_WIDTH-1 - (5*delta),SSD1306_HEIGHT-1 - (5*delta),Black);
 	  ssd1306_UpdateScreen();
-	  HAL_Delay(50);
+	  HAL_Delay(75);
   }
   ssd1306_UpdateScreen();
   return;

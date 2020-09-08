@@ -1,3 +1,4 @@
+///Hrompic 2020
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
@@ -54,6 +55,7 @@ static void MX_I2C1_Init(void);
 static void myTest();
 static void testCir();
 static void testCirb();
+static void testRect1();
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -211,17 +213,25 @@ void myTest()
 	ssd1306_Init();
 	ssd1306_Fill(Black);
 	ssd1306_WriteString("$Vasiliu$", Font_16x26, White);
-	char str[] ="My name is Vasiliu pupkin, I live in Ukraine!!!";
+	char str[] ="My name is Vasiliu pupkin, I live in Ukraine!!! ";
+	char str2[] ="Peter Martyr Vermigli (8 September 1499 - 12 November 1562) was an Italian theologian.  ";
 	for(int i=0; i<sizeof(str); i++)
 	{
 		ssd1306_SetCursor(2, 30);
-		ssd1306_WriteString(str+i, Font_7x10, White);
+		ssd1306_WriteString(str+i, Font_11x18, White);
 		ssd1306_UpdateScreen();
-		HAL_Delay(50);
+		HAL_Delay(40);
+
+		ssd1306_SetCursor(2, 52);
+		ssd1306_WriteString(str2+(uint8_t)(1.5*i), Font_7x10, White);
+		ssd1306_UpdateScreen();
+
 	}
 	HAL_Delay(500);
 	ssd1306_Fill(Black);
-	float c = 1;
+//	ssd1306_WriteString("Тестовая версия русского шрифта", Font_5x7, White);
+//	ssd1306_UpdateScreen();
+//	HAL_Delay(3000);
 	for(int i=0; i<20; i++)
 	{
 		ssd1306_DrawRectangle(0+i, 0+i, 50+i, 50+i, White);
@@ -232,18 +242,61 @@ void myTest()
 		ssd1306_DrawRectangle(0+i, 0+i, 50+i, 50+i, Black);
 		ssd1306_UpdateScreen();
 	}
-	for(int i=0; i<20; i++)
+	for(int i=0; i<40; i++)
 	{
-		ssd1306_DrawRectangle(20*c+i, 20*c+i, 70*c-i, 70*c-i, White);
+		ssd1306_DrawRectangle(40+i, 20+i, 90-i, 40-i, White);
 		ssd1306_UpdateScreen();
 	}
-	for(int i=0; i<20; i++)
-		{
-		ssd1306_DrawRectangle(20*c+i, 20*c+i, 70*c-i, 70*c-i, Black);
+	for(int i=0; i<40; i++)
+	{
+		ssd1306_DrawRectangle(40+i, 20+i, 90-i, 40-i, Black);
 		ssd1306_UpdateScreen();
-		}
-	ssd1306_UpdateScreen();
+	}
 	ssd1306_TestRectangle();
+	testRect1();
+
+	testCir();
+	testCirb();
+}
+/* USER CODE END 4 */
+void testCir()
+{
+	for(int delta = 0; delta < 40; delta ++)
+	{
+		ssd1306_DrawCircle(SSD1306_WIDTH/2, SSD1306_HEIGHT/2, delta*2, White);
+		ssd1306_UpdateScreen();
+	}
+	for(int delta = 0; delta < 40; delta ++)
+	{
+		ssd1306_DrawCircle(SSD1306_WIDTH/2, SSD1306_HEIGHT/2, delta*2, Black);
+		ssd1306_UpdateScreen();
+	}
+
+}
+void testCirb()
+{
+	for(int delta=40; delta>0; delta--)
+	{
+		ssd1306_DrawCircle(SSD1306_WIDTH/2, SSD1306_HEIGHT/2, delta*2, White);
+		ssd1306_UpdateScreen();
+	}
+	for(int delta=40; delta>0; delta--)
+	{
+		ssd1306_DrawCircle(SSD1306_WIDTH/2, SSD1306_HEIGHT/2, delta*2, Black);
+		ssd1306_UpdateScreen();
+	}
+
+}
+void testRect1()
+{
+  int i;
+
+  for(i=7; i>=0; i--)
+  {
+    ssd1306_DrawRectangle(1 + (5*i),1 + (5*i) ,SSD1306_WIDTH-1 - (5*i),SSD1306_HEIGHT-1 - (5*i),White);
+    ssd1306_UpdateScreen();
+    HAL_Delay(75);
+  }
 	{
 		  HAL_Delay(50);
 		  ssd1306_Line(1,1,SSD1306_WIDTH - 1,SSD1306_HEIGHT - 1,Black);
@@ -251,37 +304,13 @@ void myTest()
 		  ssd1306_Line(SSD1306_WIDTH - 1,1,1,SSD1306_HEIGHT - 1,Black);
 		  ssd1306_UpdateScreen();
 	}
-	testCir();
-	testCirb();
-}
-/* USER CODE END 4 */
-void testCir()
-{
-	for(int delta = 0; delta < 50; delta ++)
-	{
-		ssd1306_DrawCircle(SSD1306_WIDTH/2, SSD1306_HEIGHT/2, delta, White);
-		ssd1306_UpdateScreen();
-	}
-	for(int delta = 0; delta < 50; delta ++)
-	{
-		ssd1306_DrawCircle(SSD1306_WIDTH/2, SSD1306_HEIGHT/2, delta, Black);
-		ssd1306_UpdateScreen();
-	}
-
-}
-void testCirb()
-{
-	for(int delta=50; delta>0; delta--)
-	{
-		ssd1306_DrawCircle(SSD1306_WIDTH/2, SSD1306_HEIGHT/2, delta, White);
-		ssd1306_UpdateScreen();
-	}
-	for(int delta=50; delta>0; delta--)
-	{
-		ssd1306_DrawCircle(SSD1306_WIDTH/2, SSD1306_HEIGHT/2, delta, Black);
-		ssd1306_UpdateScreen();
-	}
-
+  for(i=7; i>=0; i--)
+  {
+	  ssd1306_DrawRectangle(1 + (5*i),1 + (5*i) ,SSD1306_WIDTH-1 - (5*i),SSD1306_HEIGHT-1 - (5*i),Black);
+	  ssd1306_UpdateScreen();
+	  HAL_Delay(75);
+  }
+  ssd1306_UpdateScreen();
 }
 /**
   * @brief  This function is executed in case of error occurrence.
